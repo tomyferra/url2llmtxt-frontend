@@ -16,8 +16,7 @@ const DownloadResult = ({ downloadUrl, onReset, onView }) => {
       <div className="flex flex-col gap-3 mt-2">
         <a
           href={downloadUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          download
           className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-200"
         >
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
