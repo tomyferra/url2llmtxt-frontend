@@ -1,6 +1,17 @@
 import React from 'react';
 
-const DownloadResult = ({ downloadUrl, onReset, onView }) => {
+const DownloadResult = ({ downloadUrl, filename, onReset, onView }) => {
+  const handleDownload = async () => {
+    const response = await fetch(downloadUrl);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-300">
       <div className="flex justify-center mb-4">
@@ -14,16 +25,15 @@ const DownloadResult = ({ downloadUrl, onReset, onView }) => {
       <p className="text-emerald-700 mb-6 font-medium">Your text file is ready for download.</p>
 
       <div className="flex flex-col gap-3 mt-2">
-        <a
-          href={downloadUrl}
-          download
+        <button
+          onClick={handleDownload}
           className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-200"
         >
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           Download .txt
-        </a>
+        </button>
 
         <button
           onClick={onView}

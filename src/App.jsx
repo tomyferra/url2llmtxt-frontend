@@ -8,6 +8,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState(null);
+  const [filename, setFilename] = useState('result.txt');
   const [content, setContent] = useState('');
   const [enhancedMode, setEnhancedMode] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -20,6 +21,7 @@ function App() {
     try {
       const result = await convertUrl(url, enhancedMode);
       setDownloadUrl(result.download_url);
+      setFilename(result.filename);
       setContent(result.content);
     } catch (err) {
       setError(err.message);
@@ -30,6 +32,7 @@ function App() {
 
   const handleReset = () => {
     setDownloadUrl(null);
+    setFilename('result.txt');
     setContent('');
     setError(null);
   };
@@ -62,6 +65,7 @@ function App() {
           ) : (
             <DownloadResult
               downloadUrl={downloadUrl}
+              filename={filename}
               onReset={handleReset}
               onView={() => setShowPreview(true)}
             />
