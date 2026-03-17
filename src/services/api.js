@@ -14,7 +14,6 @@ export const convertUrl = async (url) => {
     const response = await api.post('/convert', {
       url
     });
-    console.log("response from convert", response)
     return response.data;
   } catch (error) {
     const message = error.response?.data?.detail || 'An unexpected error occurred. Please try again.';
